@@ -1,6 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using StoreApp.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<AppDbContext>(
+        options => options.UseSqlite(builder.Configuration.GetConnectionString("sqlite3")));
 
 var app = builder.Build();
 
