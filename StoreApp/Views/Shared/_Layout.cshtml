@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <h1>Navigation</h1>
+        @RenderSection(name:"Navigation",required:false)
+    </nav>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer>
+        <h1>Footer</h1>
+        @RenderSection(name:"Footer",required:false)
+    </footer>
+
+    @RenderSection(name:"Scripts",required:false)
+</body>
+
+</html>

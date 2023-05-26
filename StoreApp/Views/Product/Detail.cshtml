@@ -1,23 +1,18 @@
+@{
+    Layout = "_Layout";
+}
+
 @using StoreApp.Models;
 
 @model Product
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <div>
-        <h3>@Model.Name</h3>
-        <input type="text" value="@Model.Price" disabled>
-        <a href="/Product/index">back</a>
-    </div>
-</body>
-
-</html>
+@section Scripts{
+    <script>
+        let name = document.getElementById("modelName").innerText;    
+        alert(`Product Name : ${name}`);            
+    </script>
+}
+<div>
+    <h3 id="modelName">@Model.Name</h3>
+    <input type="text" value="@Model.Price" disabled>
+    <a href="/Product/index">back</a>
+</div>
