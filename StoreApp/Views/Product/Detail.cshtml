@@ -1,12 +1,6 @@
 @model Product
 @section Scripts{
-    <script>
-        let name = document.getElementById("modelName").innerText;    
-        alert(`Product Name : ${name}`);            
-    </script>
 }
 <div>
-    <h3 id="modelName">@Model.Name</h3>
-    <input type="text" value="@Model.Price" disabled>
-    <a href="/Product/index">back</a>
+   <partial name="_ProductDetailPartialView" model="@Model"/>
 </div>
