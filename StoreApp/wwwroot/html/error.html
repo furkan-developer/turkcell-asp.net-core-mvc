@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *,::after,::before{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .flex-container{
+            height: 100vh;
+            width: 100vw;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;            
+        }
+        .flex-item{
+            background-color: rgba(34, 151, 241,0.3);
+            border-left: 8px solid  rgb(34, 151, 241);
+            padding: 10px;
+            padding-left: 20px;
+            width: 50%;
+            border-radius: 2px;
+        }
+        .error-text{
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-container">
+        <div class="flex-item">
+            <p class="error-text">Error page</p>
+        </div>
+    </div>
+</body>
+</html>

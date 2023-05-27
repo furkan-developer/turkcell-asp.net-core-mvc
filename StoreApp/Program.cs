@@ -13,6 +13,9 @@ var app = builder.Build();
 // Redirecting HTTP Requests to HTTPs.
 app.UseHttpsRedirection();
 
+// Use static files under wwwroot folder
+app.UseStaticFiles();
+
 // Resolving Requests and creates endpoint.
 app.UseRouting();
 
