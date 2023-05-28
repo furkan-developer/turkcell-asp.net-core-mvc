@@ -1,11 +1,28 @@
 @model IEnumerable<Product>
 
-@foreach (Product item in Model)
-{
-    <div style="margin-bottom: 2rem;">
-        <h3>@item.Name</h3>
-        <input type="text" value="@item.Price" disabled>
-        <a href="/Product/detail/@item.Id">Detail</a>
-        <hr>
-    </div>
-}
+<table class="table table-success table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+            foreach (Product item in Model)
+            {
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td><a asp-action="Detail" asp-route-id="@item.Id" asp-asp-controller="Product" class="btn btn-info">
+                        <i class="fa-solid fa-circle-info"></i>Detail
+                    </a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

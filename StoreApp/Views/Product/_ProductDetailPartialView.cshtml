@@ -1,6 +1,10 @@
-
 @model Product
 
-<h3 id="modelName">@Model.Name</h3>
-<input type="text" value="@Model.Price" disabled>
-<a href="/Product/index">back</a>
+<div class="card p-2 mt-4" style="width: 18rem;">
+    <img src="~/images/laptop-lenovo.jpg" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Price.ToString("c")</p>
+    </div>
+</div>
+<a asp-action="Index" asp-asp-controller="Product" class="btn btn-primary mt-2"><i class="fa-solid fa-arrow-left"></i>Back</a>
