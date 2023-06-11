@@ -3,26 +3,55 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using StoreApp.Models;
+using Repository.EfCore;
 
 #nullable disable
 
 namespace StoreApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230525161749_product_seed_data")]
-    partial class product_seed_data
+    [Migration("20230611134409_init_mig")]
+    partial class init_mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
 
-            modelBuilder.Entity("StoreApp.Models.Product", b =>
+            modelBuilder.Entity("Domain.Entities.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Book"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Electronic"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("ImgUrl")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -39,30 +68,35 @@ namespace StoreApp.Migrations
                         new
                         {
                             Id = 1,
+                            ImgUrl = "/images/1.jpg",
                             Name = "Computer",
                             Price = 17000m
                         },
                         new
                         {
                             Id = 2,
+                            ImgUrl = "/images/2.jpg",
                             Name = "Keyboard",
                             Price = 1000m
                         },
                         new
                         {
                             Id = 3,
+                            ImgUrl = "/images/3.jpg",
                             Name = "Mouse",
                             Price = 500m
                         },
                         new
                         {
                             Id = 4,
+                            ImgUrl = "/images/4.jpg",
                             Name = "Monitor",
                             Price = 7000m
                         },
                         new
                         {
                             Id = 5,
+                            ImgUrl = "",
                             Name = "Deck",
                             Price = 1500m
                         });
