@@ -10,6 +10,7 @@ namespace Repository.Contracts
     {
         List<Product> GetAllProducts(bool isTrackChanges);
         Product? GetOneProductById(int id, bool isTrackChanges);
+        int GetTotalProduct();
     }
 
     public interface ICategoryRepository

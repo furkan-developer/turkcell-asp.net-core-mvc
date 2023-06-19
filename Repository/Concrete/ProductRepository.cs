@@ -17,6 +17,11 @@ namespace Repository.Concrete
         public List<Product> GetAllProducts(bool isTrackChanges) => FindAll(isTrackChanges).ToList();
 
         public Product? GetOneProductById(int id, bool isTrackChanges) => FindByCondition(isTrackChanges, p => p.Id.Equals(id));
+
+        public int GetTotalProduct()
+        {
+            return FindAll(false).Count();
+        }
     }
 
     public class CategoryRepository : RepositoryBase<Category>, ICategoryRepository

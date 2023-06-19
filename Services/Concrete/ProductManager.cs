@@ -26,5 +26,10 @@ namespace Services.Concrete
         {
             return _rpManager.ProductRepository.GetOneProductById(id,isTrackChanges);
         }
+
+        public int GetTotalProduct()
+        {
+            return _rpManager.ProductRepository.GetTotalProduct();
+        }
     }
 }
