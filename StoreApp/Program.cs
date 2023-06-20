@@ -19,6 +19,7 @@ builder.Services.AddScoped(typeof(ICategoryRepository),typeof(CategoryRepository
 builder.Services.AddScoped(typeof(IRepositoryManager),typeof(RepositoryManager));
 
 builder.Services.AddScoped(typeof(IProductService),typeof(ProductManager));
+builder.Services.AddScoped(typeof(ICategoryService),typeof(CategoryManager));
 builder.Services.AddScoped(typeof(IServiceManager),typeof(ServiceManager));
 
 var app = builder.Build();

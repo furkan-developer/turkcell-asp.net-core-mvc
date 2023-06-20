@@ -1,29 +1,38 @@
 @model IEnumerable<Product>
 
-<table class="table table-success table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Price</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            int i = 0;
-            foreach (Product item in Model)
-            {
+<div class="row">
+    <div class="col-md-3">
+       @await Component.InvokeAsync("CategoriesSideBar")
+    </div>
+    <div class="col-md-9">
+        <table class="table table-success table-striped">
+            <thead>
                 <tr>
-                    <th scope="row">@i</th>
-                    <td>@item.Name</td>
-                    <td>@item.Price</td>
-                    <td><a asp-action="Detail" asp-route-id="@item.Id" asp-asp-controller="Product" class="btn btn-info">
-                        <i class="fa-solid fa-circle-info"></i>Detail
-                    </a></td>
+                    <th scope="col">#</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col"></th>
                 </tr>
-                i++;
-            }
-        }
-    </tbody>
-</table>
+            </thead>
+            <tbody>
+                @{
+                    int i = 0;
+                    foreach (Product item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@i</th>
+                            <td>@item.Name</td>
+                            <td>@item.Price</td>
+                            <td><a asp-action="Detail" asp-route-id="@item.Id" asp-asp-controller="Product"
+                                    class="btn btn-info">
+                                    <i class="fa-solid fa-circle-info"></i>Detail
+                                </a></td>
+                        </tr>
+                        i++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,8 @@
+@model List<Category>
+
+<ul class="list-group mb-3">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">@item.CategoryName</li>
+    }
+</ul>
