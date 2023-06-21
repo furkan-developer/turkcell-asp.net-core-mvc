@@ -33,9 +33,19 @@ app.UseStaticFiles();
 // Resolving Requests and creates endpoint.
 app.UseRouting();
 
-// Mapping endpoint with controller action.
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Product}/{action=Index}/{id?}");
+// Mapping endpoints with a controller action
+app.UseEndpoints(endpoints => {
+    
+    endpoints.MapAreaControllerRoute(
+        name:"admin",
+        areaName:"admin",
+        pattern: "admin/{controller=Dashboard}/{action=Index}/{id?}"
+    );
+
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Product}/{action=Index}/{id?}"
+    );
+});
 
 app.Run();
