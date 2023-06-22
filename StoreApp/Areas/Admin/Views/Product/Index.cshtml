@@ -1,0 +1,27 @@
+@model List<Product>
+
+<div class="d-flex justify-content-end">
+    <a class="btn btn-outline-success" asp-action="Create" asp-controller="Product" asp-area="admin"><i class="fa fa-plus"></i> Create</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <th scope="col">Id</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Operations</th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Price.ToString("c")</td>
+                <td>
+                    <a class="btn btn-warning" asp-action="Update" asp-controller="Product" asp-route-id="@item.Id" asp-area="admin"><i class="fa fa-edit"></i>edit</a>
+                    <a class="btn btn-primary" asp-action="Detail" asp-controller="Product" asp-route-id="@item.Id" asp-area=""><i class="fa fa-search"></i>Web</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
