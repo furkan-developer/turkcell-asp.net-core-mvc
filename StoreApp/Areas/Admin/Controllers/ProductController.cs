@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Services;
-
+using Domain.Entities;
 
 namespace StoreApp.Areas.Admin.Controllers
 {
-    [Area(areaName:"admin")]
+    [Area(areaName: "admin")]
     public class ProductController : Controller
     {
         private readonly IServiceManager _serviceManager;
@@ -25,6 +25,25 @@ namespace StoreApp.Areas.Admin.Controllers
             var products = _serviceManager.ProductService.GetAllProducts(false);
 
             return View(products);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([Bind(nameof(Product.Name), nameof(Product.Price), nameof(Product.ImgUrl))][FromForm] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _serviceManager.ProductService.CreateOneProduct(product);
+                return RedirectToAction(actionName:nameof(Index));
+            }
+            
+            return View();
         }
     }
 }

@@ -17,6 +17,12 @@ namespace Services.Concrete
             _rpManager = rpManager;
         }
 
+        public void CreateOneProduct(Product product)
+        {
+            _rpManager.ProductRepository.CreateOneProduct(product);
+            _rpManager.SaveChanges();
+        }
+
         public List<Product> GetAllProducts(bool isTrackChanges)
         {
             return _rpManager.ProductRepository.GetAllProducts(isTrackChanges);

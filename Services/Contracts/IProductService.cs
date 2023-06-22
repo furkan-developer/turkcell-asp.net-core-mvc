@@ -8,6 +8,7 @@ namespace Services.Contracts
 {
     public interface IProductService
     {
+        void CreateOneProduct(Product product);
         List<Product> GetAllProducts(bool isTrackChanges);
         Product? GetOneProductById(bool isTrackChanges, int id);
         int GetTotalProduct();

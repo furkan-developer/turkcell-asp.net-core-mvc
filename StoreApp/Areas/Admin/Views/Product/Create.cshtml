@@ -1,0 +1,25 @@
+@model Product
+
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <form asp-action="Create" asp-controller="Product" asp-area="admin" method="post">
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="ImgUrl" class="form-label"></label>
+                <input asp-for="ImgUrl" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-outline-success">Create</button>
+        </form>
+    </div>
+    <div class="col-4"></div>
+</div>

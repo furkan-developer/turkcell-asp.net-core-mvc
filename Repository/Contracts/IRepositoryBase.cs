@@ -10,5 +10,6 @@ namespace Repository.Contracts
     {
         IQueryable<T> FindAll(bool isTrack);
         T? FindByCondition(bool isTrack, Expression<Func<T,bool>> expression);
+        void Insert(T product);
     }
 }

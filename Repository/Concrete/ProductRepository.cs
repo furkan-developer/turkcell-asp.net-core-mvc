@@ -14,6 +14,11 @@ namespace Repository.Concrete
         {
         }
 
+        public void CreateOneProduct(Product product)
+        {
+            Insert(product);
+        }
+
         public List<Product> GetAllProducts(bool isTrackChanges) => FindAll(isTrackChanges).ToList();
 
         public Product? GetOneProductById(int id, bool isTrackChanges) => FindByCondition(isTrackChanges, p => p.Id.Equals(id));

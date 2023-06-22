@@ -33,5 +33,10 @@ namespace Repository.Concrete
             ? _context.Set<T>().SingleOrDefault(expression)
             : _context.Set<T>().AsNoTracking().SingleOrDefault(expression);
         }
+
+        public void Insert(T product)
+        {
+            _context.Add<T>(product);
+        }
     }
 }
