@@ -12,5 +12,6 @@ namespace Repository.Contracts
         Product? GetOneProductById(int id, bool isTrackChanges);
         void CreateOneProduct(Product product);
         int GetTotalProduct();
+        void UpdateOneProduct(Product product);
     }
 }

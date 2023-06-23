@@ -40,9 +40,33 @@ namespace StoreApp.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _serviceManager.ProductService.CreateOneProduct(product);
-                return RedirectToAction(actionName:nameof(Index));
+                return RedirectToAction(actionName: nameof(Index));
             }
-            
+
+            return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            var product = _serviceManager.ProductService.GetOneProductById(false,id);
+
+            return View(product);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update([Bind(nameof(Product.Id),nameof(Product.Name), nameof(Product.Price), nameof(Product.ImgUrl))][FromForm] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _serviceManager.ProductService.UpdateOneProduct(product);
+
+                TempData["ModelProcess"] = "Ürün güncellendi";
+                return RedirectToAction(actionName: nameof(Index));
+            }
+
             return View();
         }
     }

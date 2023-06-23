@@ -1,5 +1,13 @@
 @model List<Product>
 
+@if(TempData["ModelProcess"] != null){
+    @section ModelProcess{
+        <div class="alert alert-success alert-dismissible fade show text-center mb-0" role="alert" >
+            @TempData["ModelProcess"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+} 
 <div class="d-flex justify-content-end">
     <a class="btn btn-outline-success" asp-action="Create" asp-controller="Product" asp-area="admin"><i class="fa fa-plus"></i> Create</a>
 </div>

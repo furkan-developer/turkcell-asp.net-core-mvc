@@ -38,5 +38,10 @@ namespace Repository.Concrete
         {
             _context.Add<T>(product);
         }
+
+        public void Modify(T entity)
+        {
+            _context.Update(entity);
+        }
     }
 }

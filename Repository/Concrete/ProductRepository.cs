@@ -27,5 +27,10 @@ namespace Repository.Concrete
         {
             return FindAll(false).Count();
         }
+
+        public void UpdateOneProduct(Product product)
+        {
+            Modify(product);
+        }
     }
 }

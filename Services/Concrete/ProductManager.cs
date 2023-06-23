@@ -37,5 +37,11 @@ namespace Services.Concrete
         {
             return _rpManager.ProductRepository.GetTotalProduct();
         }
+
+        public void UpdateOneProduct(Product product)
+        {
+            _rpManager.ProductRepository.UpdateOneProduct(product);
+            _rpManager.SaveChanges();
+        }
     }
 }

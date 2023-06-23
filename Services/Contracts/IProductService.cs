@@ -12,5 +12,6 @@ namespace Services.Contracts
         List<Product> GetAllProducts(bool isTrackChanges);
         Product? GetOneProductById(bool isTrackChanges, int id);
         int GetTotalProduct();
+        void UpdateOneProduct(Product product);
     }
 }
