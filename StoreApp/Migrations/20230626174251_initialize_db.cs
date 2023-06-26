@@ -4,7 +4,7 @@
 
 namespace StoreApp.Migrations
 {
-    public partial class init_mig : Migration
+    public partial class initialize_db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,11 +29,18 @@ namespace StoreApp.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Price = table.Column<decimal>(type: "TEXT", nullable: false),
-                    ImgUrl = table.Column<string>(type: "TEXT", nullable: true)
+                    ImgUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    CategoryId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.InsertData(
@@ -48,37 +55,47 @@ namespace StoreApp.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "ImgUrl", "Name", "Price" },
-                values: new object[] { 1, "/images/1.jpg", "Computer", 17000m });
+                columns: new[] { "Id", "CategoryId", "ImgUrl", "Name", "Price" },
+                values: new object[] { 1, 1, "/images/1.jpg", "Computer", 17000m });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "ImgUrl", "Name", "Price" },
-                values: new object[] { 2, "/images/2.jpg", "Keyboard", 1000m });
+                columns: new[] { "Id", "CategoryId", "ImgUrl", "Name", "Price" },
+                values: new object[] { 2, 2, "/images/2.jpg", "Keyboard", 1000m });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "ImgUrl", "Name", "Price" },
-                values: new object[] { 3, "/images/3.jpg", "Mouse", 500m });
+                columns: new[] { "Id", "CategoryId", "ImgUrl", "Name", "Price" },
+                values: new object[] { 3, 2, "/images/3.jpg", "Mouse", 500m });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "ImgUrl", "Name", "Price" },
-                values: new object[] { 4, "/images/4.jpg", "Monitor", 7000m });
+                columns: new[] { "Id", "CategoryId", "ImgUrl", "Name", "Price" },
+                values: new object[] { 4, 2, "/images/4.jpg", "Monitor", 7000m });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "ImgUrl", "Name", "Price" },
-                values: new object[] { 5, "", "Deck", 1500m });
+                columns: new[] { "Id", "CategoryId", "ImgUrl", "Name", "Price" },
+                values: new object[] { 5, 1, "", "Deck", 50m });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "CategoryId", "ImgUrl", "Name", "Price" },
+                values: new object[] { 6, 1, "", "Suç ve Ceza", 60m });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Categories");
         }
     }
 }

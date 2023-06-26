@@ -12,5 +12,8 @@ namespace Domain.Entities
         [Required]
         public decimal Price { get; set; }
         public String? ImgUrl { get; set; } = String.Empty;
+
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; } = null;
     }
 }
