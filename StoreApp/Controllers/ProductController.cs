@@ -6,27 +6,35 @@ using Microsoft.AspNetCore.Mvc;
 using Domain.Entities;
 using Repository.EfCore;
 using Repository.Contracts;
+using Services.Dtos;
+using StoreApp.Models.Product;
+using Services;
 
 namespace StoreApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductRepository _productRp;
+        private readonly IServiceManager _serviceManager;
 
-        public ProductController(IProductRepository productRp)
+        public ProductController(IServiceManager serviceManager)
         {
-            _productRp = productRp;
+            _serviceManager = serviceManager;
         }
 
         public IActionResult Index()
         {
-            var data = _productRp.GetAllProducts(false);
-            return View(data);
+            var products = _serviceManager.ProductService.GetAllProducts(false);
+            var model = new ProductListViewModel()
+            {
+                Products = products
+            };
+
+            return View(model);
         }
 
         public IActionResult Detail([FromRoute] int id)
         {
-            var data = _productRp.GetOneProductById(id,false);
+            var data = _serviceManager.ProductService.GetOneProductById(false, id);
             return View(data);
         }
     }

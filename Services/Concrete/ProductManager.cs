@@ -5,32 +5,44 @@ using System.Threading.Tasks;
 using Domain.Entities;
 using Services.Contracts;
 using Repository;
+using Services.Dtos;
+using AutoMapper;
 
 namespace Services.Concrete
 {
     public class ProductManager : IProductService
     {
         private readonly IRepositoryManager _rpManager;
+        private readonly IMapper _mapper;
 
-        public ProductManager(IRepositoryManager rpManager)
+        public ProductManager(IRepositoryManager rpManager, IMapper mapper)
         {
             _rpManager = rpManager;
+            _mapper = mapper;
         }
 
-        public void CreateOneProduct(Product product)
+        public void CreateOneProduct(ProductDtoForCreate dtoForCreate)
         {
+            Product product = _mapper.Map<Product>(dtoForCreate);
             _rpManager.ProductRepository.CreateOneProduct(product);
             _rpManager.SaveChanges();
         }
 
-        public List<Product> GetAllProducts(bool isTrackChanges)
+        public List<ProductDto> GetAllProducts(bool isTrackChanges)
         {
-            return _rpManager.ProductRepository.GetAllProducts(isTrackChanges);
+            var products = _rpManager.ProductRepository.GetAllProducts
+            (isTrackChanges);
+
+            return _mapper.Map<List<ProductDto>>(products);
         }
 
-        public Product? GetOneProductById(bool isTrackChanges, int id)
+        public ProductDto? GetOneProductById(bool isTrackChanges, int id)
         {
-            return _rpManager.ProductRepository.GetOneProductById(id,isTrackChanges);
+            Product? product =  _rpManager.ProductRepository.GetOneProductById(id,isTrackChanges);
+
+            ProductDto productDto = _mapper.Map<ProductDto>(product);
+            
+            return productDto;
         }
 
         public int GetTotalProduct()
@@ -38,8 +50,10 @@ namespace Services.Concrete
             return _rpManager.ProductRepository.GetTotalProduct();
         }
 
-        public void UpdateOneProduct(Product product)
+        public void UpdateOneProduct(ProductDtoForUpdate dtoForUpdate)
         {
+            Product product = _mapper.Map<Product>(dtoForUpdate);
+            
             _rpManager.ProductRepository.UpdateOneProduct(product);
             _rpManager.SaveChanges();
         }

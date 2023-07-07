@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Domain.Entities;
 using Services.Contracts;
 using Repository;
+using Services.Dtos;
 
 namespace Services.Concrete
 {
@@ -21,5 +22,6 @@ namespace Services.Concrete
         {
             return _rp.CategoryRepository.GetAllCategories(false);
         }
+
     }
 }

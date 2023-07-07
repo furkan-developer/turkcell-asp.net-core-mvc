@@ -1,4 +1,8 @@
-@model IEnumerable<Product>
+@model ProductListViewModel
+
+@{
+    var products = Model.Products;
+}
 
 <div class="row">
     <div class="col-md-3">
@@ -17,7 +21,7 @@
             <tbody>
                 @{
                     int i = 0;
-                    foreach (Product item in Model)
+                    foreach (ProductDto item in products)
                     {
                         <tr>
                             <th scope="row">@i</th>

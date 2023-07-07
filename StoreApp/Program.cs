@@ -6,10 +6,13 @@ using Repository;
 using Services.Contracts;
 using Services.Concrete;
 using Services;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddDbContext<AppDbContext>(
         options => options.UseSqlite(builder.Configuration.GetConnectionString("sqlite3"),b => b.MigrationsAssembly("StoreApp")));
