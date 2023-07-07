@@ -1,11 +1,15 @@
-@model ProductDto
+@model ProductUpdateViewModel
 
 <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
-        <form asp-action="Update" asp-controller="Product" asp-area="admin" method="post">
+
+        <img src="@(Model.ImgUrl)" class="img-fluid">
+
+        <form asp-action="Update" asp-controller="Product" asp-area="admin" method="post" enctype="multipart/form-data">
             <div>
                 <input type="hidden" asp-for="Id">
+                <input type="hidden" asp-for="ImgUrl">
             </div>
             <div class="mb-3">
                 <label asp-for="Name" class="form-label"></label>
@@ -16,8 +20,8 @@
                 <input asp-for="Price" class="form-control" />
             </div>
             <div class="mb-3">
-                <label asp-for="ImgUrl" class="form-label"></label>
-                <input asp-for="ImgUrl" class="form-control" />
+                <label for="ImageUrl" class="form-label">Select Image</label>
+                <input type="file" name="FormFile" id="ImageUrl" class="form-control"/>
             </div>
 
             <button type="submit" class="btn btn-outline-success">Update</button>

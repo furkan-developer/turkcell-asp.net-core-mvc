@@ -7,7 +7,7 @@ namespace Services.Dtos
 {
     public class ProductDtoForCreate : ProductDto
     {
-
+        
     }
     public class ProductDtoForUpdate : ProductDto
     {

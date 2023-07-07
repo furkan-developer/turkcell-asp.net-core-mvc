@@ -8,6 +8,9 @@ using Microsoft.Extensions.Logging;
 using Services;
 using Domain.Entities;
 using Services.Dtos;
+using StoreApp.Models.Product;
+using AutoMapper;
+using StoreApp.Utilities.FileUpload;
 
 namespace StoreApp.Areas.Admin.Controllers
 {
@@ -15,10 +18,12 @@ namespace StoreApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IServiceManager _serviceManager;
+        private readonly IMapper _mapper;
 
-        public ProductController(IServiceManager serviceManager)
+        public ProductController(IServiceManager serviceManager,IMapper mapper)
         {
             _serviceManager = serviceManager;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -36,11 +41,16 @@ namespace StoreApp.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind(nameof(Product.Name), nameof(Product.Price), nameof(Product.ImgUrl))][FromForm] ProductDtoForCreate dtoForCreate)
+        public async Task<IActionResult> Create([FromForm] ProductCreateViewModel createViewModel,[FromServices]IBufferedFileUpload fileUpload)
         {
             if (ModelState.IsValid)
             {
+                await createViewModel.SetImgUrl(createViewModel.FormFile,fileUpload);
+                
+                ProductDtoForCreate dtoForCreate = _mapper.Map<ProductDtoForCreate>(createViewModel);   
+
                 _serviceManager.ProductService.CreateOneProduct(dtoForCreate);
+                
                 return RedirectToAction(actionName: nameof(Index));
             }
 
@@ -52,17 +62,22 @@ namespace StoreApp.Areas.Admin.Controllers
         public IActionResult Update(int id)
         {
             var product = _serviceManager.ProductService.GetOneProductById(false,id);
+            ProductUpdateViewModel updateViewModel = _mapper.Map<ProductUpdateViewModel>(product);
 
-            return View(product);
+            return View(updateViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update([Bind(nameof(Product.Id),nameof(Product.Name), nameof(Product.Price), nameof(Product.ImgUrl))][FromForm] ProductDtoForUpdate dtoForUpdate)
+        public async Task<IActionResult> Update([FromForm] ProductUpdateViewModel updateViewModel,[FromServices]IBufferedFileUpload fileUpload)
         {
             if (ModelState.IsValid)
             {
-                _serviceManager.ProductService.UpdateOneProduct(dtoForUpdate);
+                await updateViewModel.SetImgUrl(updateViewModel.FormFile,fileUpload);
+
+                ProductDtoForUpdate dto = _mapper.Map<ProductDtoForUpdate>(updateViewModel);
+
+                _serviceManager.ProductService.UpdateOneProduct(dto);
 
                 TempData["ModelProcess"] = "Ürün güncellendi";
                 return RedirectToAction(actionName: nameof(Index));

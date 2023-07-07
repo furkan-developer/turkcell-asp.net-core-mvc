@@ -1,9 +1,9 @@
-@model ProductDtoForCreate
+@model ProductCreateViewModel
 
 <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
-        <form asp-action="Create" asp-controller="Product" asp-area="admin" method="post">
+        <form asp-action="Create" asp-controller="Product" asp-area="admin" method="post" enctype="multipart/form-data">
 
             <div class="mb-3">
                 <label asp-for="Name" class="form-label"></label>
@@ -14,8 +14,8 @@
                 <input asp-for="Price" class="form-control" />
             </div>
             <div class="mb-3">
-                <label asp-for="ImgUrl" class="form-label"></label>
-                <input asp-for="ImgUrl" class="form-control" />
+                <label for="ImgUrl" class="form-label">Select Image</label>
+                <input type="file" name="FormFile" id="ImgUrl" class="form-control" />
             </div>
 
             <button type="submit" class="btn btn-outline-success">Create</button>

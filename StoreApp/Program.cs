@@ -7,6 +7,7 @@ using Services.Contracts;
 using Services.Concrete;
 using Services;
 using System.Reflection;
+using StoreApp.Utilities.FileUpload;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,13 +18,18 @@ builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<AppDbContext>(
         options => options.UseSqlite(builder.Configuration.GetConnectionString("sqlite3"),b => b.MigrationsAssembly("StoreApp")));
 
+// Repository Layer refereces
 builder.Services.AddScoped(typeof(IProductRepository),typeof(ProductRepository));
 builder.Services.AddScoped(typeof(ICategoryRepository),typeof(CategoryRepository));
 builder.Services.AddScoped(typeof(IRepositoryManager),typeof(RepositoryManager));
 
+// Service Layer refereces
 builder.Services.AddScoped(typeof(IProductService),typeof(ProductManager));
 builder.Services.AddScoped(typeof(ICategoryService),typeof(CategoryManager));
 builder.Services.AddScoped(typeof(IServiceManager),typeof(ServiceManager));
+
+//Utility references
+builder.Services.AddTransient<IBufferedFileUpload,BufferedFileUpload>();
 
 var app = builder.Build();
 
