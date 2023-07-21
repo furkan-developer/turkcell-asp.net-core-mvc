@@ -18,6 +18,7 @@ namespace StoreApp.Profiles
             CreateMap<ProductCreateViewModel,ProductDtoForCreate>();
             CreateMap<ProductDto,ProductUpdateViewModel>();
             CreateMap<ProductUpdateViewModel,ProductDtoForUpdate>();
+            CreateMap<ProductDto,ProductForCartViewModel>();
         }
     }
 }

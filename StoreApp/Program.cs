@@ -8,10 +8,13 @@ using Services.Concrete;
 using Services;
 using System.Reflection;
 using StoreApp.Utilities.FileUpload;
+using StoreApp.Models.Carts;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -28,6 +31,19 @@ builder.Services.AddScoped(typeof(IProductService),typeof(ProductManager));
 builder.Services.AddScoped(typeof(ICategoryService),typeof(CategoryManager));
 builder.Services.AddScoped(typeof(IServiceManager),typeof(ServiceManager));
 
+// Cart and session service register
+builder.Services.AddScoped(typeof(Cart), serviceProvider => SessionCart.GetCart(serviceProvider));
+builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 //Utility references
 builder.Services.AddTransient<IBufferedFileUpload,BufferedFileUpload>();
 
@@ -42,6 +58,8 @@ app.UseStaticFiles();
 // Resolving Requests and creates endpoint.
 app.UseRouting();
 
+app.UseSession();
+
 // Mapping endpoints with a controller action
 app.UseEndpoints(endpoints => {
     
@@ -55,6 +73,8 @@ app.UseEndpoints(endpoints => {
         name: "default",
         pattern: "{controller=Product}/{action=Index}/{id?}"
     );
+
+    endpoints.MapRazorPages();
 });
 
 app.Run();
