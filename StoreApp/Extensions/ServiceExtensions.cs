@@ -63,5 +63,13 @@ namespace StoreApp.Extensions
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
+
+        public static void ConfigureRouteService(this IServiceCollection services)
+        {
+            services.AddRouting(options =>
+            {
+                options.LowercaseUrls = true;
+            });
+        }
     }
 }

@@ -14,6 +14,7 @@ builder.Services.ConfigureRepositoryRegistration();
 builder.Services.ConfigureServiceRegistration();
 builder.Services.ConfigureCartStore();
 builder.Services.ConfigureFileUpload();
+builder.Services.ConfigureRouteService();
 
 var app = builder.Build();
 
