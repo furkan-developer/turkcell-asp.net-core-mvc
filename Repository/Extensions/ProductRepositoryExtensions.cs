@@ -12,5 +12,10 @@ namespace Repository.Extensions
             return categoryId is null ? products
                 : products.Where(p => p.CategoryId.Equals(categoryId));
         }
+
+        public static IQueryable<Product> SearchedByTermOnProductName(this IQueryable<Product> products,string searchTerm){
+            return  String.IsNullOrEmpty(searchTerm) ? products
+                : products.Where(p => p.Name.ToLower().Contains(searchTerm.Trim().ToLower()));
+        }
     }
 }

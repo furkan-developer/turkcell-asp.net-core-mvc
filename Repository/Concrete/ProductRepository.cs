@@ -27,6 +27,7 @@ namespace Repository.Concrete
         {
             return FindAll(isTrackChanges)
             .FilteredByCategoryId(parameter.CategoryId)
+            .SearchedByTermOnProductName(parameter.SearchTerm)
             .ToList();
         }
 

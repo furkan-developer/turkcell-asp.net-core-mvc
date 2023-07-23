@@ -1,0 +1,18 @@
+@model ProductFilterViewModel
+
+@{
+    string categoryId = Context.Request.Query["CategoryId"];
+}
+<div class="my-3">
+    <p><i class="fa-solid fa-filter"></i>Filters</p>
+    <form method="get" asp-action="Index" asp-controller="Product">
+        <input type="hidden" name="CategoryId" value="@categoryId">
+        <div class="my-2">
+            <label asp-for="SearchTerm"></label>
+            <input class="form-control" asp-for="SearchTerm">
+        </div>
+        <div class="my-2">
+            <button type="submit" class="btn btn-secondary">Apply</button>
+        </div>
+    </form>
+</div>
