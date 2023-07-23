@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Repository.Contracts;
 using Domain.Entities;
 using Repository.EfCore;
+using Domain.RequestParameters;
+using Repository.Extensions;
 
 namespace Repository.Concrete
 {
@@ -20,6 +22,13 @@ namespace Repository.Concrete
         }
 
         public List<Product> GetAllProducts(bool isTrackChanges) => FindAll(isTrackChanges).ToList();
+
+        public List<Product> GetAllProductsWithDetails(bool isTrackChanges, ProductRequestParameter parameter)
+        {
+            return FindAll(isTrackChanges)
+            .FilteredByCategoryId(parameter.CategoryId)
+            .ToList();
+        }
 
         public Product? GetOneProductById(int id, bool isTrackChanges) => FindByCondition(isTrackChanges, p => p.Id.Equals(id));
 

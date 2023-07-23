@@ -9,6 +9,7 @@ using Repository.Contracts;
 using Services.Dtos;
 using StoreApp.Models.Product;
 using Services;
+using Domain.RequestParameters;
 
 namespace StoreApp.Controllers
 {
@@ -21,9 +22,9 @@ namespace StoreApp.Controllers
             _serviceManager = serviceManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(ProductRequestParameter parameters)
         {
-            var products = _serviceManager.ProductService.GetAllProducts(false);
+            var products = _serviceManager.ProductService.GetAllProductsWithDetails(false,parameters);
             var model = new ProductListViewModel()
             {
                 Products = products

@@ -7,6 +7,7 @@ using Services.Contracts;
 using Repository;
 using Services.Dtos;
 using AutoMapper;
+using Domain.RequestParameters;
 
 namespace Services.Concrete
 {
@@ -33,6 +34,13 @@ namespace Services.Concrete
             var products = _rpManager.ProductRepository.GetAllProducts
             (isTrackChanges);
 
+            return _mapper.Map<List<ProductDto>>(products);
+        }
+
+        public List<ProductDto> GetAllProductsWithDetails(bool isTrackChanges, ProductRequestParameter parameters)
+        {
+            var products = _rpManager.ProductRepository.GetAllProductsWithDetails(false,parameters);
+            
             return _mapper.Map<List<ProductDto>>(products);
         }
 

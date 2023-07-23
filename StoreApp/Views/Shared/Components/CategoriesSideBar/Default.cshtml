@@ -3,6 +3,6 @@
 <ul class="list-group mb-3">
     @foreach (var item in Model)
     {
-        <li class="list-group-item">@item.CategoryName</li>
+        <li class="list-group-item"><a asp-action="Index" asp-controller="Product" asp-route-categoryId="@item.CategoryId">@item.CategoryName</a></li>
     }
 </ul>
